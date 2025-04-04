@@ -1,0 +1,8 @@
+# build:
+# merge-install: true
+# symlink-install: true
+# cmake-args:
+#   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+# packages-ignore:
+#   - demo_nodes_cpp
+#   - demo_nodes_py
