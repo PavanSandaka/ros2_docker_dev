@@ -32,8 +32,9 @@ RUN apt update && apt install -y --no-install-recommends \
 RUN locale-gen en_US en_US.UTF-8 && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 # Add ROS 2 GPG key and repo
-RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | apt-key add - && \
-    echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2.list
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" \
+    > /etc/apt/sources.list.d/ros2.list
 
 # Install ROS 2
 RUN apt update && apt install -y ros-${ROS_DISTRO}-desktop && \
@@ -57,8 +58,9 @@ COPY requirements/dev_requirements.txt ./dev_requirements.txt
 RUN pip install -r dev_requirements.txt
 
 # Pre-install common Python packages
+# REMOVE from pip install
 RUN pip install --upgrade pip && \
-    pip install colcon-common-extensions vcstool
+    pip install vcstool
 
 # Source environment and build (will rebuild when container is run)
 CMD ["/bin/bash"]

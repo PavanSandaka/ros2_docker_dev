@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  ros2-dev:
+    build:
+      context: .devcontainer
+      dockerfile: osrf-dockerfile
+    volumes:
+      - ./ros2_ws:/root/ros2_ws
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=${DISPLAY}
+    network_mode: host
+    privileged: true
+    runtime: nvidia
+    stdin_open: true
+    tty: true

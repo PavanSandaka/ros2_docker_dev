@@ -1,0 +1,41 @@
+FROM osrf/ros:humble-desktop-full
+
+SHELL ["/bin/bash", "-c"]
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && apt install -y \
+    git \
+    nano \
+    sudo \ 
+    apt-utils \ 
+    python3-pip \
+    build-essential \
+    libcanberra-gtk-module \
+    libcanberra-gtk3-module \
+    at-spi2-core \
+    cmake \
+    pkg-config \
+    libjpeg-dev \
+    libtiff5-dev \
+    make \
+    ament-cmake \
+    ament-lint \
+    ros-humble-moveit \
+    ros-humble-control* \
+    ros-humble-gazebo* \
+    ros-humble-joint-state-publisher-gui \
+    ros-humble-moveit-servo \
+    ros-humble-ign-ros2-control
+
+RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+    RUN apt update && apt install -y \
+    ros-humble-ros-gz \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
+
+# Create ROS 2 workspace
+WORKDIR /root/ros2_ws
+RUN mkdir -p src
+
+ENTRYPOINT ["/bin/bash"]
