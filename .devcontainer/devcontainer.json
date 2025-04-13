@@ -4,10 +4,6 @@
     "service": "ros2-dev",
     "workspaceFolder": "/root/ros2_ws",
     "remoteUser": "root",
-    "build": {
-        "context": "..",
-        "dockerfile": "osrf-dockerfile"
-    },
     "customizations": {
         "vscode": {
             "extensions": [

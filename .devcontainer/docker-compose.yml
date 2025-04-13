@@ -3,8 +3,8 @@ version: "3.8"
 services:
   ros2-dev:
     build:
-      context: .devcontainer
-      dockerfile: osrf-dockerfile
+      context: ..
+      dockerfile: .devcontainer/osrf-dockerfile
     volumes:
       - ./ros2_ws:/root/ros2_ws
       - /tmp/.X11-unix:/tmp/.X11-unix
