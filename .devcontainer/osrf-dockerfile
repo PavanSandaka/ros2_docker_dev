@@ -38,4 +38,5 @@ RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 WORKDIR /root/ros2_ws
 RUN mkdir -p src
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
+CMD ["sleep infinity"]
